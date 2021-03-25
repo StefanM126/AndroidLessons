@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ListView</string>
+    <string name="button1">DODAJ</string>
+    <string name="et1">Unesi tekst</string>
+</resources>

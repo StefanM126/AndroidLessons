@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Activities</string>
+    <string name="dugme_1">DUGME 1</string>
+    <string name="dugme_2">DUGME 2</string>
+    <string name="dugme_3">DUGME 3</string>
+    <string name="dugme_4">DUGME 4</string>
+    <string name="dugme_5">DUGME 5</string>
+    <string name="dugme_6">DUGME 6</string>
+    <string name="textview">TextView</string>
+</resources>
