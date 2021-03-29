@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CustomAdapter</string>
+    <string name="tekst1">Text 1</string>
+    <string name="tekst2">Text 2</string>
+    <string name="tekst3">Text 3</string>
+    <string name="tekst4">Text 4</string>
+    <string name="tekst5">Text 5</string>
+    <string name="tekst6">Text 6</string>
+    <string name="tekst7">Text 7</string>
+    <string name="tekst8">Text 8</string>
+    <string name="tekst9">Text 9</string>
+    <string name="tekst10">Text 10</string>
+</resources>
