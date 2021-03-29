@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         lista_m.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) { // ima i onLongClickListener
                 adapter.removeItem(position);
                 return false;
             }
