@@ -24,11 +24,13 @@ public class StudentDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" +
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
                 COLUMN_FIRST_NAME + " TEXT, " +
                 COLUMN_LAST_NAME  + " TEXT, " +
                 COLUMN_INDEX      + " TEXT);");
     }
+
+
 
     public void insert (Student student) {
         SQLiteDatabase db = getWritableDatabase();
@@ -42,7 +44,7 @@ public class StudentDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Student[] readAllStudnets () {
+    public Student[] readAllStudents () {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
         if(cursor.getCount() <= 0){
@@ -50,9 +52,9 @@ public class StudentDBHelper extends SQLiteOpenHelper {
             return null;
         }
 
-        Student students[]  = new Student[cursor.getCount()];
+        Student[] students  = new Student[cursor.getCount()];
         int i = 0;
-        for(cursor.moveToFirst(); cursor.isAfterLast(); cursor.moveToNext()) {
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
           students[i++] = createStudent(cursor);
         }
 
@@ -61,7 +63,7 @@ public class StudentDBHelper extends SQLiteOpenHelper {
     }
 
     private Student createStudent (Cursor cursor) {
-        String firstName = cursor.getString(cursor.getColumnIndex(COLUMN_FIRST_NAME));
+        String firstName = cursor.getString(cursor.getColumnIndex(COLUMN_FIRST_NAME)); // vraca sta se nalazi u koloni u kojoj je column_first_name
         String lastName = cursor.getString(cursor.getColumnIndex(COLUMN_LAST_NAME));
         String index = cursor.getString(cursor.getColumnIndex(COLUMN_INDEX));
         return new Student(firstName, lastName, index);
@@ -69,15 +71,22 @@ public class StudentDBHelper extends SQLiteOpenHelper {
 
     public Student findStudentByIndex(String index) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, null, COLUMN_FIRST_NAME + "=?", new String[] {index}, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, null, COLUMN_INDEX + "=?", new String[] {index}, null, null, null);
 
         if(cursor.getCount() <= 0){
             db.close();
             return null;
         }
+
         cursor.moveToFirst();
         db.close();
         return createStudent(cursor);
+    }
+
+    public void deleteStudent(String index) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_INDEX + "=?", new String[] {index});
+        db.close();
     }
 
     @Override
